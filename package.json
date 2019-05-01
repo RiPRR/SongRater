@@ -1,0 +1,23 @@
+{
+  "name": "songrater",
+  "version": "1.0.0",
+  "description": "song rating utility",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RiPRR/SongRater.git"
+  },
+  "author": "Ryan Rivera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RiPRR/SongRater/issues"
+  },
+  "homepage": "https://github.com/RiPRR/SongRater#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "passport-local": "^1.0.0"
+  }
+}
