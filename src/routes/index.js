@@ -14,7 +14,12 @@ const isAuthenticated = function(req,res,next){
 module.exports = function(passport){
 
 	router.get("/",(req,res)=>{
-		res.send("HELLO WORLD")
+		if(req.user){
+			res.render("main.hbs",{"username":req.user.username,"login":"flex"})
+		}
+		else{
+			res.render("main.hbs",{"login":"none"})
+		}
 	})
 
 	router.get("/:id",isAuthenticated,(req,res)=>{
@@ -32,7 +37,7 @@ module.exports = function(passport){
 	router.post("/register",passport.authenticate("register",{failureRedirect:"/failure",}),
 		(req,res)=>{
 			//on success print this on failure redirect to /failure
-			res.redirect("/"+req.user.username)
+			res.redirect("/")
 	})
 
 	//login route employing Passport login Strategy (login.js)

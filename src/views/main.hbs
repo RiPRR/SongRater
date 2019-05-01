@@ -1,0 +1,26 @@
+<h1 id="title">RATE THIS SONG</h1>
+<div id="infoDiv">
+	<h2 id="logininfo">USER: {{username}}</h2>
+</div>
+<style>
+	#logininfo{
+		display: {{login}};
+	}
+</style>
+<div id="loginDiv">
+	<form action="/register" method="POST" id="access" class="noselect">
+		<h1 id="accessText">REGISTER</h1>
+		<h3 id="regSwitch" class="hvr-pulse-shrink">(LOGIN?)</h3>
+		<input type="text" placeholder="USERNAME" name="username">
+		<input type="text" placeholder="PASSWORD"  name="password">
+		<button id="accessBttn">SUBMIT</button>
+	</form>
+</div>
+<div id=heading>
+	<h2>instructions</h2>
+	<div id="instructions">
+		<p>Please read the lyrics below and select a rating for each emotion present in the line</p>
+		<p>Try to be as unbiased as possible and rate the line independently from the song as a whole</p>
+	</div>
+</div>
+
