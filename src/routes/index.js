@@ -15,7 +15,9 @@ module.exports = function(passport){
 
 	router.get("/",(req,res)=>{
 		if(req.user){
-			res.render("main.hbs",{"username":req.user.username,"login":"flex"})
+			res.render("main.hbs",{"username":req.user.username,
+				"login":"flex",
+				"register":"none"})
 		}
 		else{
 			res.render("main.hbs",{"login":"none"})
@@ -44,7 +46,7 @@ module.exports = function(passport){
 	router.post("/login",passport.authenticate("login",{failureRedirect:"/failure",}),
 		(req,res)=>{
 			//on success print this on failure redirect to /failure
-			res.redirect("/"+req.user.username)
+			res.redirect("/")
 	})
 
 	return router
