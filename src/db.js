@@ -7,14 +7,15 @@ mongoose.set('useCreateIndex', true);
 
 //All the fields relevant to a ride (not all fields but the ones relevant to this app)
 const ratingSchema = new mongoose.Schema({
-	song:{type:String,required:true},
+	title:{type:String,required:true},
+	artist:{type:String,required:true},
 	user:{type:String,required:true},
-	data:{type:Map,required:true},
+	data:{type:Array,required:true},
 });
 const userSchema = new mongoose.Schema({
 	username:{type:String,required:true},
 	password:{type:String,required:true},
-	songs:{type:Map,required:false}
+	songs:{type:Array,required:false}
 })
 mongoose.model("Rating",ratingSchema)
 const Rating = mongoose.model("Rating")

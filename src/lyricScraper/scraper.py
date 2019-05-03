@@ -2,7 +2,8 @@ import re
 import urllib.request
 from bs4 import BeautifulSoup
 import sys
- 
+from Naked.toolshed.shell import execute_js,muterun_js
+
 def get_lyrics(artist,song_title):
     artist = artist.lower()
     song_title = song_title.lower()
@@ -28,4 +29,30 @@ def get_lyrics(artist,song_title):
         return "Exception occurred \n" +str(e)
 artist = sys.argv[1]
 title = sys.argv[2]
-print(get_lyrics(artist,title))
+stuff = get_lyrics(artist,title)
+stuff2 = stuff.split("<br/>")
+verses = []
+verse = []
+for line in stuff2:
+    line = line.strip("\n")
+    if line.strip():
+        verse.append(line)
+    else:
+        tooAdd = verse.copy()
+        verses.append(tooAdd)
+        verse = []
+fileName = artist+"-"+title+".txt"
+f = open(fileName,"w")
+for verse in verses:
+    f.write("\n")
+    for line in verse:
+        f.write(line+"\n")
+f.close()
+resp = muterun_js('uploader.js',fileName+" "+title+" "+artist)
+if(resp.exitcode == 0):
+    print("python-success")
+    print(resp.stdout)
+
+
+else:
+    print("python-fail")
