@@ -14,8 +14,8 @@
 	<form action="/register" method="POST" id="access" class="noselect">
 		<h1 id="accessText">REGISTER</h1>
 		<h3 id="regSwitch" class="hvr-buzz">(LOGIN?)</h3>
-		<input type="text" placeholder="USERNAME" name="username">
-		<input type="text" placeholder="PASSWORD"  name="password">
+		<input id="userLog" type="text" placeholder="USERNAME" name="username">
+		<input id="passLog" type="text" placeholder="PASSWORD"  name="password">
 		<button id="accessBttn">SUBMIT</button>
 	</form>
 </div>
@@ -25,5 +25,24 @@
 		<p>Please read the lyrics below and make sure you understand them before continuing.</p>
 		<p>Try to be as unbiased as possible and try to read from the perspective of the Author</p>
 	</div>
+</div>
+<div id="outputDiv">
+	{{#if results}}
+		<h2>{{title}}</h2>
+		<h3>BY: {{artist}}</h3>
+		{{#each results as |verse|}}
+			<p>
+				{{#each verse as |line|}}
+					<li>
+						{{line}}
+					</li>
+				{{/each}}
+			</p>
+		{{/each}}
+		<form id="render" action="/survey">
+			<button id="surveyBttn">CONTINUE</button>
+		</form>
+		
+	{{/if}}
 </div>
 

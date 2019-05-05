@@ -6,19 +6,18 @@ mongoose.set('useCreateIndex', true);
 
 
 //All the fields relevant to a ride (not all fields but the ones relevant to this app)
-const ratingSchema = new mongoose.Schema({
+const songSchema = new mongoose.Schema({
 	title:{type:String,required:true},
 	artist:{type:String,required:true},
-	user:{type:String,required:true},
-	data:{type:Array,required:true},
+	lyrics:{type:Array,required:true},
 });
 const userSchema = new mongoose.Schema({
 	username:{type:String,required:true},
 	password:{type:String,required:true},
 	songs:{type:Array,required:false}
 })
-mongoose.model("Rating",ratingSchema)
-const Rating = mongoose.model("Rating")
+mongoose.model("Song",songSchema)
+const Rating = mongoose.model("Song")
 mongoose.model("User",userSchema)
 const User = mongoose.model("User")
 
@@ -36,7 +35,8 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
  // conenction string appropriately!
  const conf = JSON.parse(data);
  dbconf = conf.dbconf;
-} else {
+} 
+else {
  // if we're not in PRODUCTION mode, then use
  dbconf = 'mongodb://localhost/songratings';
 }

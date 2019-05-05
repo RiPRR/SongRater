@@ -17,6 +17,9 @@
 #accessText{
 	margin-bottom: 0px;
 }
+#userLog,#passLog{
+	width: 100%;
+}
 #infoDiv{
 	display: flex;
 	justify-content: center;
@@ -31,7 +34,24 @@
 	margin-top: 0px;
 	font-size: 32pt;
 }
+#lineDiv{
+	display: none;
+	flex-direction: column;
+	align-items: center;
+}
+#outputDiv{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
 h3{
 	cursor: pointer;
+	margin-top: 0px;
+}
+p{
+	margin: 8px;
+}
+input{
+	width: 10%;
 }
 

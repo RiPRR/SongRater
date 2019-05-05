@@ -3,7 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const db = require('../db')
 const User = mongoose.model('User')
-const Rating = mongoose.model('Rating')
+const Song = mongoose.model('Song')
 
 const isAuthenticated = function(req,res,next){
 	if(req.isAuthenticated()){
@@ -15,25 +15,33 @@ module.exports = function(passport){
 
 	router.get("/",(req,res)=>{
 		if(req.user){
-			res.render("main.hbs",{"username":req.user.username,
+			Song.find({title:"brand_new_city"}, function(err, results, count) {
+				const lyrics = results[0].lyrics
+				const title = ((results[0].title).replace(/_/g," ")).toUpperCase()
+				const artist = ((results[0].artist).replace(/_/g," ")).toUpperCase()
+				res.render("main.hbs",{"username":req.user.username,
 				"login":"flex",
-				"register":"none"})
+				"register":"none",
+				"results":lyrics,
+				"title":title,
+				"artist":artist
+				})
+			})
 		}
 		else{
 			res.render("main.hbs",{"login":"none"})
 		}
 	})
 
-	router.get("/:id",isAuthenticated,(req,res)=>{
-		if(req.user.username === req.params.id){
-			username = req.user.username
-			Ride.find({username:username}, function(err, results, count) {
-				res.render("user.hbs",{"username":username,"results":results})
-			}).limit(20);
-		}
-		else{
-			res.redirect("/")
-		}
+	
+	router.get("/songData",(req,res)=>{
+		Song.find({title:"brand_new_city"}, function(err, results, count) {
+				res.send(results[0])
+		})
+	})
+
+	router.get("/survey",isAuthenticated,(req,res)=>{
+		res.render("rating.hbs",{username:req.user.username})
 	})
 
 	router.post("/register",passport.authenticate("register",{failureRedirect:"/failure",}),

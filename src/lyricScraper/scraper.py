@@ -30,6 +30,7 @@ def get_lyrics(artist,song_title):
 artist = sys.argv[1]
 title = sys.argv[2]
 stuff = get_lyrics(artist,title)
+print(stuff)
 stuff2 = stuff.split("<br/>")
 verses = []
 verse = []
@@ -48,6 +49,7 @@ for verse in verses:
     for line in verse:
         f.write(line+"\n")
 f.close()
+
 resp = muterun_js('uploader.js',fileName+" "+title+" "+artist)
 if(resp.exitcode == 0):
     print("python-success")
@@ -56,3 +58,4 @@ if(resp.exitcode == 0):
 
 else:
     print("python-fail")
+    print(resp.stderr)
