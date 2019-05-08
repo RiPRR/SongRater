@@ -7,6 +7,13 @@ window.addEventListener('load', function() {
 	const lineDiv = document.getElementById("lineDiv")
 	const begin = document.getElementById("beginSurvey")
 	const nextBttn = document.getElementById("nextBttn")
+	const finish = document.getElementById("submitBttn")
+	const sName = document.getElementById("sName")
+	if(sName){
+		let fName = sName.textContent
+		fName = fName.replace(" ","_").toLowerCase()
+		myStorage.setItem("songName",fName)
+	}
 	if(logSwitch){
 		logSwitch.addEventListener('click', function() {
 	   		if(logSwitch.textContent === "(REGISTER?)"){
@@ -22,8 +29,8 @@ window.addEventListener('load', function() {
 		})
 	}
 	if(lineDiv){
-		//myStorage.setItem("lineNum","1")
-		//myStorage.setItem("totalLines","10")
+		let songName = myStorage.getItem("songName")
+		console.log(songName)
 		const xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function(){
 			if(this.readyState==4 && this.status == 200){
@@ -31,36 +38,52 @@ window.addEventListener('load', function() {
 				myStorage.setItem("songData",data)
 			}
 		} 
-		xhttp.open("GET","/songData",true)
+		xhttp.open("GET","/getSong/"+songName,true)
 		xhttp.send()
 	}
 	if(begin){
 		begin.addEventListener("click",function(){
 			processData()
+			begin.style.display = "none"
+			myStorage.setItem("ratings","[]")
 		})
 	}
 	if(nextBttn){
 		nextBttn.addEventListener("click",function(){
 			let curLine = Number(myStorage.getItem("curLine"))
+			let anger = Number(document.getElementById("angerRank").value)
+			let joy = Number(document.getElementById("joyRank").value)
+			let disgust = Number(document.getElementById("disgustRank").value)
+			let sadness = Number(document.getElementById("sadnessRank").value)
+			let fear = Number(document.getElementById("fearRank").value)
+			let surprise = Number(document.getElementById("surpriseRank").value)
+			let curRatings = myStorage.getItem("ratings")
+			let parsedRatings = JSON.parse(curRatings)
+			if(parsedRatings.length<=1){
+				let name = myStorage.getItem("songName")
+				parsedRatings.push({name})
+			}
+			parsedRatings.push({
+				anger:anger,
+				joy:joy,
+				disgust:disgust,
+				sadness:sadness,
+				fear:fear,
+				surprise:surprise,
+			})
+			parsedRatings = JSON.stringify(parsedRatings)
+			myStorage.setItem("ratings",parsedRatings)
 			curLine+=1
 			myStorage.setItem("curLine",curLine)
 			renderLine(curLine)
 		})
 	}
+	if(finish){
+		finish.addEventListener("click",function(){
+			upload()
+		})
+	}
 })
-function renderLine(lineNum){
-	let lyrics = myStorage.getItem("lyrics").split(",")
-	lyrics = lyrics.filter(function (el) {
-  		return el != "";
-	});
-	let lineText = document.getElementById("line")
-	let progress = document.getElementById("progress")
-	let displayArea = document.getElementById("lineDiv")
-	progress.textContent = "Line "+lineNum+"/"+myStorage.getItem("lines")
-	lineText.textContent = lyrics[lineNum-1]
-	displayArea.style.display = "flex"
-	//console.log(lyrics)
-}
 function processData(){
 	let data = JSON.parse(myStorage.getItem("songData"))
 	let lyrics = data["lyrics"]
@@ -79,4 +102,43 @@ function processData(){
 	myStorage.setItem("lines",formattedLyrics.length)
 	myStorage.setItem("curLine",1)
 	renderLine(1)
+}
+function renderLine(lineNum){
+		let lineText = document.getElementById("line")
+		let progress = document.getElementById("progress")
+		let displayArea = document.getElementById("lineDiv")
+		let inputs = document.getElementById("inputs")
+		let finish = document.getElementById("submitBttn")
+
+	if(lineNum<=myStorage.getItem("lines")){
+		let lyrics = myStorage.getItem("lyrics").split(",")
+		lyrics = lyrics.filter(function (el) {
+	  		return el != "";
+		});
+		progress.textContent = "Line "+lineNum+"/"+myStorage.getItem("lines")
+		lineText.textContent = lyrics[lineNum-1]
+		displayArea.style.display = "flex"
+		//console.log(lyrics)
+	}
+	else{
+		lineText.textContent = "THANK YOU!"
+		inputs.style.display = "none"
+		finish.style.display = "flex"
+	}
+}
+function upload(){
+	let ratingsData = myStorage.getItem("ratings")
+	//let songName = myStorage.getItem("songName")
+	//let songData = {songName}
+	//songData = JSON.stringify(songData)
+	const xhttp = new XMLHttpRequest();
+	xhttp.open("POST","/newRating",true)
+	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xhttp.onreadystatechange = function(){
+		if(this.readyState==4 && this.status == 200){
+			alert("SUCCESS!: Please close this window and return to Amazon Turk")
+		}
+	} 
+	xhttp.send(ratingsData)
+	
 }

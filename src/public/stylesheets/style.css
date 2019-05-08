@@ -44,6 +44,15 @@
 	align-items: center;
 	flex-direction: column;
 }
+#inputs{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#submitBttn{
+	display: none;
+}
 h3{
 	cursor: pointer;
 	margin-top: 0px;
@@ -52,6 +61,6 @@ p{
 	margin: 8px;
 }
 input{
-	width: 10%;
+	width: 150%;
 }
 

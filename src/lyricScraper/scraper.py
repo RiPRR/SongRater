@@ -26,7 +26,8 @@ def get_lyrics(artist,song_title):
         lyrics = lyrics.replace('<br>','').replace('</br>','').replace('</div>','').strip()
         return lyrics
     except Exception as e:
-        return "Exception occurred \n" +str(e)
+        print("Exception occurred \n" +str(e))
+        sys.exit()
 artist = sys.argv[1]
 title = sys.argv[2]
 stuff = get_lyrics(artist,title)

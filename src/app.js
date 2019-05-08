@@ -9,8 +9,8 @@ const expressSession = require('express-session');
 const passport = require("passport")
 const cookieParser = require('cookie-parser')
 const initPassport = require("./passport/init")
-
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(expressSession({
 	secret:"secretKey", 
 	resave: true,
