@@ -90,6 +90,19 @@ module.exports = function(passport){
 		})
 	})
 
+	router.get("/getRatings/:Song/:User",(req,res)=>{
+		let songTitle = req.params.Song
+		let targetUser = req.params.User
+		Rating.find({"song.title":songTitle,"user.username":"admin"},function(err,results,count){
+			let baselineRatings = results[0]["ratings"]
+			Rating.find({"song.title":songTitle,"user.username":targetUser},function(err,results,count){
+				let userRatings = results[0]["ratings"]
+				let contaner = [baselineRatings,userRatings]
+				res.send(contaner)
+			})
+		})
+	})
+
 	router.post("/register",passport.authenticate("register",{failureRedirect:"/failure",}),
 		(req,res)=>{
 			//on success print this on failure redirect to /failure

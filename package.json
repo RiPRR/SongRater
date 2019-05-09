@@ -18,6 +18,9 @@
   "homepage": "https://github.com/RiPRR/SongRater#readme",
   "dependencies": {
     "cookie-parser": "^1.4.4",
-    "passport-local": "^1.0.0"
+    "correlation-rank": "^0.2.0",
+    "node-correlation": "^1.0.2",
+    "passport-local": "^1.0.0",
+    "request": "^2.88.0"
   }
 }
