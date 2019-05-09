@@ -46,7 +46,8 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
 } 
 else {
  // if we're not in PRODUCTION mode, then use
- dbconf = 'mongodb://localhost/songratings';
+ //dbconf = 'mongodb://localhost/songratings';
+ dbconf = 'mongodb://admin:dbpassword1@ds123752.mlab.com:23752/heroku_2wkhrhm9';
 }
 
 mongoose.connect(dbconf);
