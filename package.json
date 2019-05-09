@@ -4,7 +4,8 @@
   "description": "song rating utility",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,22 @@
   },
   "homepage": "https://github.com/RiPRR/SongRater#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "correlation-rank": "^0.2.0",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "hbs": "^4.0.4",
+    "mongo-sanitize": "^1.0.1",
+    "mongoose": "^5.5.3",
     "node-correlation": "^1.0.2",
+    "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "request": "^2.88.0"
+  },
+  "engines": {
+    "node": "8.11.2"
   }
 }
