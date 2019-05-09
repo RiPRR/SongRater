@@ -143,7 +143,11 @@ function upload(){
 	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xhttp.onreadystatechange = function(){
 		if(this.readyState==4 && this.status == 200){
-			alert("SUCCESS!: Please close this window")
+			let endBttn = document.getElementById("submitBttn")
+			let another = document.getElementById("retBttn")
+			endBttn.style.display = "none"
+			another.style.display = "flex"
+			alert("SUCCESS!: Please close this window or click the button below to rate another song")
 		}
 	} 
 	xhttp.send(ratingsData)

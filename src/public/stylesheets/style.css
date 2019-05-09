@@ -24,8 +24,8 @@
 }
 #title{
 	text-align: center;
-	font-size: 35pt;
-	font-family: "helvetica"
+	font-size: 60pt;
+	font-family: "glitch"
 }
 #access{
 	display: flex;
@@ -54,6 +54,7 @@
 #logininfo{
 	margin-top: 0px;
 	font-size: 32pt;
+	font-family: "glitch"
 }
 #lineDiv{
 	display: none;
@@ -91,7 +92,9 @@
 	align-items: center;
 	margin-bottom: 10px;
 }
-
+#retBttn{
+	display: none
+}
 .eInputs{
 	margin-bottom: 20px;
 	margin-left: 20px;
@@ -116,5 +119,13 @@ input{
 }
 body{
 	background-color: #8797AF
+}
+@font-face {
+  font-family: glitch;
+  src: url(../fonts/multivac-interference.ttf);
+}
+@font-face {
+  font-family: glitch2;
+  src: url(../fonts/multivac-ghost.ttf);
 }
 
