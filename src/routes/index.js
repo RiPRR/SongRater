@@ -20,7 +20,8 @@ module.exports = function(passport){
 				let songResults = results
 				User.find({username:req.user.username},function(err,results,count){
 					done = false
-					let rand = 0
+					looped = false
+					let rand = Math.floor(Math.random()*((songResults.length-1)-0+1)+0)
 					while(!done){
 						console.log(rand)
 						let selection = songResults[rand]
@@ -39,6 +40,14 @@ module.exports = function(passport){
 							done = true
 						}
 						else{
+							if(rand === songResults.length-1 && looped === true){
+								res.send("<h1>NO MORE SONGS TO RATE! PLEASE EXIT</h1>")
+								break
+							}
+							else if(rand === songResults.length-1){
+								rand = -1
+								looped = true
+							}
 							rand+=1
 						}
 					}
