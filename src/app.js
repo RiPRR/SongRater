@@ -21,6 +21,7 @@ app.use(passport.session())
 app.use(cookieParser())
 app.use(express.static('public'))
 app.use(express.static(__dirname + '/public'))
+app.set('views', path.join(__dirname, '/src/views'));
 app.set("view-engine","hbs")
 
 const routes = require("./routes/index")(passport)
