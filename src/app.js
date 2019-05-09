@@ -9,6 +9,7 @@ const expressSession = require('express-session');
 const passport = require("passport")
 const cookieParser = require('cookie-parser')
 const initPassport = require("./passport/init")
+const path = require("path")
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(expressSession({
