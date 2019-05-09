@@ -75,6 +75,12 @@ window.addEventListener('load', function() {
 			myStorage.setItem("ratings",parsedRatings)
 			curLine+=1
 			myStorage.setItem("curLine",curLine)
+			document.getElementById("angerRank").value = 0
+			document.getElementById("joyRank").value = 0
+			document.getElementById("disgustRank").value = 0
+			document.getElementById("sadnessRank").value = 0
+			document.getElementById("fearRank").value = 0
+			document.getElementById("surpriseRank").value = 0
 			renderLine(curLine)
 		})
 	}
@@ -123,6 +129,7 @@ function renderLine(lineNum){
 	else{
 		lineText.textContent = "THANK YOU!"
 		inputs.style.display = "none"
+		labels.style.display = "none"
 		finish.style.display = "flex"
 	}
 }
@@ -136,7 +143,7 @@ function upload(){
 	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xhttp.onreadystatechange = function(){
 		if(this.readyState==4 && this.status == 200){
-			alert("SUCCESS!: Please close this window and return to Amazon Turk")
+			alert("SUCCESS!: Please close this window")
 		}
 	} 
 	xhttp.send(ratingsData)

@@ -1,4 +1,4 @@
-<h1 id="title">RATE THIS SONG</h1>
+<h1 id="title">LYRIC RATER!</h1>
 <div id="infoDiv">
 	<h2 id="logininfo">{{username}}</h2>
 </div>
@@ -7,31 +7,47 @@
 		display: flex;
 	}
 </style>
-<div id=heading>
-	<div id="instructions">
-		<h2>instructions</h2>
-		<li>Please read each line below and provide a rating out of 5 for each emotion</li>
-		&nbsp
-		<li>Read each line independently of one another</li>
-		&nbsp
-		<li>Leaving a zero for a category is OK and often will be the most accurate rating for a particular emotion</li>
-		&nbsp
-		<li>Please answer as honnestly as possible, the system will detect random/spam responses and you will recieve no credit</li>
-		&nbsp
-		<button id="beginSurvey">BEGIN</button>
+<div id="infoWrapper2">
+	<div id="heading">
+		<div id="instructions">
+			<h2>**instructions**</h2>
+			<li>Please read each line below and provide a rating out of 5 for each emotion</li>
+			&nbsp
+			<li>Read each line independently of one another</li>
+			&nbsp
+			<li>Leaving a zero for a category is OK and often will be the most accurate rating for a particular emotion</li>
+			&nbsp
+			<li>Leaving a score for as few emotions as possible is preferred! Only provide a rating for emotions you really detect!</li>
+			&nbsp
+			<li>Please answer as honnestly as possible, the system will detect random/spam responses and you will recieve no credit</li>
+			&nbsp
+			<button id="beginSurvey">BEGIN</button>
+		</div>
 	</div>
 </div>
-<div id="lineDiv">
-	<h2 id="progress"><h2>
-	<h2 id="line">"TEST"</h2>
-	<div id="inputs">
-		<input id="joyRank" type="number" min="0" max="10" name="joy" placeholder="JOY" value=0></option>
-	  	<input id="angerRank" type="number" min="0" max="10" name="anger" placeholder="ANGER" value=0></option>
-	  	<input id="disgustRank" type="number" min="0" max="10" name="disgust" placeholder="DISGUST" value=0></option>
-	  	<input id="sadnessRank" type="number" min="0" max="10" name="sadness" placeholder="SADNESS" value=0></option>
-	  	<input id="fearRank" type="number" min="0" max="10" name="fear" placeholder="FEAR" value=0></option>
-	  	<input id="surpriseRank" type="number" min="0" max="10" name="surprise" placeholder="SURPRISE" value=0></option>
-	  	<button id="nextBttn">NEXT</button>
-	 </div>
-	 <button id="submitBttn">SUBMIT AND END</button>
+<div id="ratingWrapper">
+	<div id="progHeader">
+			<h2 id="progress"><h2>
+			<h2 id="line"></h2>
+		</div>
+	<div id="lineDiv">
+			<div id="labels">
+				<h3>JOY</h3>
+				<h3>ANGER</h3>
+				<h3>DISGUST</h3>
+				<h3>SADNESS</h3>
+				<h3>FEAR</h3>
+				<h3>SUPRISE</h3>
+			</div>
+			<div id="inputs">
+				<input class="eInputs" id="joyRank" type="number" min="0" max="10" name="joy" placeholder="JOY" value=0></option>
+			  	<input class="eInputs" id="angerRank" type="number" min="0" max="10" name="anger" placeholder="ANGER" value=0></option>
+			  	<input class="eInputs" id="disgustRank" type="number" min="0" max="10" name="disgust" placeholder="DISGUST" value=0></option>
+			  	<input class="eInputs" id="sadnessRank" type="number" min="0" max="10" name="sadness" placeholder="SADNESS" value=0></option>
+			  	<input class="eInputs" id="fearRank" type="number" min="0" max="10" name="fear" placeholder="FEAR" value=0></option>
+			  	<input class="eInputs" id="surpriseRank" type="number" min="0" max="10" name="surprise" placeholder="SURPRISE" value=0></option>
+			  	<button id="nextBttn">NEXT</button>
+			 </div>
+			 <button id="submitBttn">SUBMIT AND END</button>
+	</div>
 </div>

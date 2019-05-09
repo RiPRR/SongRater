@@ -83,6 +83,7 @@ module.exports = function(passport){
 				const ratingToAdd = new Rating({user:result,song:songObject,ratings:ratings})
 				ratingToAdd.save((err,saved,count)=>{
 					console.log(saved)
+					res.send("success")
 				})
 
 			})

@@ -1,4 +1,4 @@
-<h1 id="title">RATE THIS SONG</h1>
+<h1 id="title">LYRIC RATER!</h1>
 <div id="infoDiv">
 	<h2 id="logininfo">{{username}}</h2>
 </div>
@@ -10,20 +10,23 @@
 		display:{{register}};
 	}
 </style>
-<div id="loginDiv">
-	<form action="/register" method="POST" id="access" class="noselect">
-		<h1 id="accessText">REGISTER</h1>
-		<h3 id="regSwitch" class="hvr-buzz">(LOGIN?)</h3>
-		<input id="userLog" type="text" placeholder="USERNAME" name="username">
-		<input id="passLog" type="text" placeholder="PASSWORD"  name="password">
-		<button id="accessBttn">SUBMIT</button>
-	</form>
-</div>
-<div id=heading>
-	<div id="instructions">
-		<h2>instructions</h2>
-		<p>Please read the lyrics below and make sure you understand them before continuing.</p>
-		<p>Try to be as unbiased as possible and try to read from the perspective of the Author</p>
+<div id="infoWrapper">
+	<div id="loginDiv">
+		<form action="/register" method="POST" id="access" class="noselect">
+			<h1 id="accessText">REGISTER</h1>
+			<h3 id="regSwitch" class="hvr-buzz">(LOGIN?)</h3>
+			<input id="userLog" type="text" placeholder="USERNAME" name="username">
+			<input id="passLog" type="text" placeholder="PASSWORD"  name="password">
+			<button id="accessBttn">SUBMIT</button>
+		</form>
+	</div>
+	<div id=heading>
+		<div id="instructions">
+			<h2>***instructions***</h2>
+			<p>1) Please read the lyrics below and make sure you understand them before continuing.</p>
+			<p>2) Try to be as unbiased as possible and try to read from the perspective of the Author</p>
+			<p>(If you'd prefer a different song to rate, refresh the page!)</p>
+		</div>
 	</div>
 </div>
 <div id="outputDiv">
