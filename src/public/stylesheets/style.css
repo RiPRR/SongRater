@@ -98,6 +98,7 @@
 .eInputs{
 	margin-bottom: 20px;
 	margin-left: 20px;
+
 }
 h3{
 	cursor: pointer;
@@ -117,6 +118,7 @@ p{
 input{
 	width: 150%;
 }
+
 body{
 	background-color: #8797AF
 }

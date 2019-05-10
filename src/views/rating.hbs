@@ -40,12 +40,19 @@
 				<h3>SUPRISE</h3>
 			</div>
 			<div id="inputs">
-				<input class="eInputs" id="joyRank" type="number" min="0" max="5" name="joy" placeholder="JOY" value=0></option>
-			  	<input class="eInputs" id="angerRank" type="number" min="0" max="5" name="anger" placeholder="ANGER" value=0></option>
-			  	<input class="eInputs" id="disgustRank" type="number" min="0" max="5" name="disgust" placeholder="DISGUST" value=0></option>
-			  	<input class="eInputs" id="sadnessRank" type="number" min="0" max="5" name="sadness" placeholder="SADNESS" value=0></option>
-			  	<input class="eInputs" id="fearRank" type="number" min="0" max="5" name="fear" placeholder="FEAR" value=0></option>
-			  	<input class="eInputs" id="surpriseRank" type="number" min="0" max="5" name="surprise" placeholder="SURPRISE" value=0></option>
+			<script>
+			  function handleChange(input) {
+			    if (input.value < 0) input.value = 0;
+			    if (input.value > 5) input.value = 5;
+			    if(input.value.length == 0) input.value = 0;
+			  }
+			</script>
+				<input onchange="handleChange(this)" class="eInputs" id="joyRank" type="number" min="0" max="5" name="joy" placeholder="JOY" value=0></option>
+			  	<input onchange="handleChange(this)"  class="eInputs" id="angerRank" type="number" min="0" max="5" name="anger" placeholder="ANGER" value=0></option>
+			  	<input onchange="handleChange(this)"  class="eInputs" id="disgustRank" type="number" min="0" max="5" name="disgust" placeholder="DISGUST" value=0></option>
+			  	<input onchange="handleChange(this)"  class="eInputs" id="sadnessRank" type="number" min="0" max="5" name="sadness" placeholder="SADNESS" value=0></option>
+			  	<input onchange="handleChange(this)"  class="eInputs" id="fearRank" type="number" min="0" max="5" name="fear" placeholder="FEAR" value=0></option>
+			  	<input onchange="handleChange(this)"  class="eInputs" id="surpriseRank" type="number" min="0" max="5" name="surprise" placeholder="SURPRISE" value=0></option>
 			  	<button id="nextBttn">NEXT</button>
 			 </div>
 			 <button id="submitBttn">SUBMIT AND END</button>
