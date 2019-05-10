@@ -48,7 +48,10 @@ f = open(fileName,"w")
 for verse in verses:
     f.write("\n")
     for line in verse:
-        f.write(line+"\n")
+        line = line.replace("[","")
+        line = line.replace("]","")
+        line = BeautifulSoup(line)
+        f.write(line.get_text()+"\n")
 f.close()
 
 resp = muterun_js('uploader.js',fileName+" "+title+" "+artist)

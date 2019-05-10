@@ -11,6 +11,11 @@ window.addEventListener('load', function() {
 	const sName = document.getElementById("sName")
 	if(sName){
 		let fName = sName.textContent
+		//this is so fucking bad but I needed it to work
+		fName = fName.replace(" ","_").toLowerCase()
+		fName = fName.replace(" ","_").toLowerCase()
+		fName = fName.replace(" ","_").toLowerCase()
+		fName = fName.replace(" ","_").toLowerCase()
 		fName = fName.replace(" ","_").toLowerCase()
 		myStorage.setItem("songName",fName)
 	}
