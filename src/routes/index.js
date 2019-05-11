@@ -103,6 +103,15 @@ module.exports = function(passport){
 		})
 	})
 
+	router.get("/getRatings/:Song/:User/test",(req,res)=>{
+		let songTitle = req.params.Song
+		let targetUser = req.params.User
+		Rating.find({"song.title":songTitle,"user.username":{$ne:targetUser}},function(err,results,count){
+			res.send(results)
+			
+		})
+	})
+
 	router.post("/register",passport.authenticate("register",{failureRedirect:"/failure",}),
 		(req,res)=>{
 			//on success print this on failure redirect to /failure
