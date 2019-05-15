@@ -12,7 +12,7 @@ const Rating = mongoose.model('Rating')
 //baselineGen(songName,targetUser)
 
 function correlator(songName,targetUser,base){
-	request("http://localhost:3000/getRatings/"+songName+"/"+targetUser,{json:true},(err,res,body)=>{
+	request("https://songrater.herokuapp.com/getRatings/"+songName+"/"+targetUser,{json:true},(err,res,body)=>{
 		if (err) { return console.log(err); }
 			let baseline = base
 			let target = body[1]
@@ -95,7 +95,7 @@ function output(num,bList,tList){
 }
 
 function baselineGen(songName,targetUser){
-		request("http://localhost:3000/getRatings/"+songName+"/"+targetUser+"/test",{json:true},(err,res,body)=>{
+		request("https://songrater.herokuapp.com/getRatings/"+songName+"/"+targetUser+"/test",{json:true},(err,res,body)=>{
 				if (err) { return console.log(err); }
 				//console.log(songName,targetUser)
 				let bigPackage = []
