@@ -9,6 +9,8 @@ window.addEventListener('load', function() {
 	const nextBttn = document.getElementById("nextBttn")
 	const finish = document.getElementById("submitBttn")
 	const sName = document.getElementById("sName")
+	const ageField = document.getElementById("ageInput")
+	const genderField = document.getElementById("genderInput")
 	if(sName){
 		let fName = sName.textContent
 		//this is so fucking bad but I needed it to work
@@ -25,11 +27,15 @@ window.addEventListener('load', function() {
 	   			logSwitch.textContent = "(LOGIN?)"
 	   			accessText.textContent = "REGISTER"
 	   			access.setAttribute("action","/register")
+	   			ageField.style.display = ""
+	   			genderField.style.display = ""
 	   		}
 	   		else{
 	   			logSwitch.textContent = "(REGISTER?)"
 	   			accessText.textContent = "LOGIN"
 	   			access.setAttribute("action","/login")
+	   			ageField.style.display = "none"
+	   			genderField.style.display = "none"
 	   		}
 		})
 	}

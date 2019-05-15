@@ -5,6 +5,7 @@ const db = require('../db')
 const User = mongoose.model('User')
 const Song = mongoose.model('Song')
 const Rating = mongoose.model('Rating')
+var correlator = require("../correlator/correlator")
 
 const isAuthenticated = function(req,res,next){
 	if(req.isAuthenticated()){
@@ -83,6 +84,7 @@ module.exports = function(passport){
 				const ratingToAdd = new Rating({user:result,song:songObject,ratings:ratings})
 				ratingToAdd.save((err,saved,count)=>{
 					console.log(saved)
+					correlator.baseline(songName,username)
 					res.send("success")
 				})
 

@@ -43,6 +43,7 @@ for line in stuff2:
         tooAdd = verse.copy()
         verses.append(tooAdd)
         verse = []
+#title = title.replace("/","-")
 fileName = artist+"-"+title+".txt"
 f = open(fileName,"w")
 for verse in verses:

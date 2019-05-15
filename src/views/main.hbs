@@ -10,6 +10,13 @@
 		display:{{register}};
 	}
 </style>
+<script>
+	  function handleChange(input) {
+	    if (input.value < 15) input.value = 15;
+	    if (input.value > 110) input.value = 110;
+	    if(input.value.length == 0) input.value = 18;
+	  }
+</script>
 <div id="infoWrapper">
 	<div id="loginDiv">
 		<form action="/register" method="POST" id="access" class="noselect">
@@ -17,6 +24,12 @@
 			<h3 id="regSwitch" class="hvr-buzz">(LOGIN?)</h3>
 			<input id="userLog" type="text" placeholder="USERNAME" name="username">
 			<input id="passLog" type="text" placeholder="PASSWORD"  name="password">
+			<input id="ageInput" type="Number" placeholder="AGE"  name="ageInput" min=15 max=110 onchange="handleChange(this)">
+			<select name="genderInput" id="genderInput">
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+				<option value="other">Other</option>
+			</select>
 			<button id="accessBttn">SUBMIT</button>
 		</form>
 	</div>

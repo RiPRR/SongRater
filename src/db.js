@@ -14,12 +14,15 @@ const songSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
 	username:{type:String,required:true},
 	password:{type:String,required:true},
-	songs:{type:Array,required:false}
+	songs:{type:Array,required:false},
+	age:{type:Number,required:false},
+	gender:{type:String,required:false}
 })
 const ratingSchema = new mongoose.Schema({
 	user:{type:[userSchema],required:true},
 	song:{type:[songSchema],required:true},
-	ratings:{type:Array,required:true}
+	ratings:{type:Array,required:true},
+	correlation:{type:String,required:false}
 })
 
 mongoose.model("Song",songSchema)

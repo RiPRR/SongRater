@@ -1,10 +1,15 @@
-
+module.exports.baseline = baselineGen
 //ONE AT THE END TO PREVENT ERRORS WHEN ALL 0
 const correlation = require('correlation-rank');
 const request = require("request")
-let songName = process.argv[2]
-let targetUser = process.argv[3]
-baselineGen(songName,targetUser)
+const mongoose = require('mongoose')
+const db = require('../db')
+const User = mongoose.model('User')
+const Song = mongoose.model('Song')
+const Rating = mongoose.model('Rating')
+//let songName = process.argv[2]
+//let targetUser = process.argv[3]
+//baselineGen(songName,targetUser)
 
 function correlator(songName,targetUser,base){
 	request("http://localhost:3000/getRatings/"+songName+"/"+targetUser,{json:true},(err,res,body)=>{
@@ -18,14 +23,30 @@ function correlator(songName,targetUser,base){
 				bList[i].push(1)
 				tList[i].push(1)
 			}
-			let anger = output(0,bList,tList)
-			let joy= output(1,bList,tList)
-			let disgust = output(2,bList,tList)
-			let sadness = output(3,bList,tList)
-			let fear = output(4,bList,tList)
-			let suprise = output(5,bList,tList)
+			let anger = Math.floor(output(0,bList,tList))
+			let joy= Math.floor(output(1,bList,tList))
+			let disgust = Math.floor(output(2,bList,tList))
+			let sadness = Math.floor(output(3,bList,tList))
+			let fear = Math.floor(output(4,bList,tList))
+			let suprise = Math.floor(output(5,bList,tList))
 			console.log("TOTAL")
-			console.log((anger+joy+disgust+suprise+sadness+fear)/6)
+			const total = (anger+joy+disgust+suprise+sadness+fear)/6
+			const roundedTotal = (Math.floor(total))
+			console.log(roundedTotal)
+			let data = {total:roundedTotal,
+						 anger:anger,
+						 joy:joy,
+						 disgust:disgust,
+						 sadness:sadness,
+						 fear:fear,
+						 suprise:suprise
+						}
+			data = JSON.stringify(data)
+			//console.log(JSON.parse(data))
+			Rating.findOneAndUpdate({"user.username":targetUser,"song.title":songName},{$set:{correlation:data}},{new:true},function(err,result,count){
+				console.log(result)
+			})
+			return data
 	})
 }
 
@@ -59,7 +80,7 @@ function output(num,bList,tList){
 		if(num===4){emotion="fear"}
 		if(num===5){emotion="surprise"}
 		console.log(emotion.toUpperCase())
-		const score =correlation.rank(bList[num],tList[num])*100
+		const score = Math.floor(correlation.rank(bList[num],tList[num])*100)
 		console.log(score)
 		console.log()
 		console.log("BASELINE")
@@ -76,6 +97,7 @@ function output(num,bList,tList){
 function baselineGen(songName,targetUser){
 		request("http://localhost:3000/getRatings/"+songName+"/"+targetUser+"/test",{json:true},(err,res,body)=>{
 				if (err) { return console.log(err); }
+				//console.log(songName,targetUser)
 				let bigPackage = []
 				for(let i=0;i<body.length;i++){
 					let target = body[i]["ratings"]
@@ -108,13 +130,13 @@ function baselineGen(songName,targetUser){
 							if(i===3){emotion="sadness"}
 							if(i===4){emotion="fear"}
 							if(i===5){emotion="surprise"}
-							console.log("RATING: "+rating+" EMOTION: "+emotion+" SCORE: "+score)
+							//console.log("RATING: "+rating+" EMOTION: "+emotion+" SCORE: "+score)
 						}
 						let average = total/bigPackage.length
 						newPackage[i].push(Math.round(average*10)/10)
 					}
 				}
-				console.log(newPackage.length)
+				//console.log(newPackage.length)
 				for(let i=0;i<newPackage[0].length;i++){
 					let line = {}
 					for(let j=0;j<newPackage.length;j++){
@@ -127,10 +149,12 @@ function baselineGen(songName,targetUser){
 					}
 					baseline.push(line)
 				}
-				console.log(baseline)
-				correlator(songName,targetUser,baseline)
+				//console.log(baseline)
+				let toReturn = correlator(songName,targetUser,baseline)
+				return toReturn
 		})
 }
+
 
 
 

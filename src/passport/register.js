@@ -10,8 +10,10 @@ module.exports = function(passport){
 	function(req,username,password,done){
 		createUser = function(){
 			//make sure user entries are not dangerous by sanitizing!
+			age = req.body["ageInput"]
+			gender = req.body["genderInput"]
 			password = sanitize(password)
-			username = sanitize(username)
+			username = sanitize(username).trim()
 			//look to see if the username already exists
 			User.findOne({"username":username},function(err,user){
 				if(err){
@@ -28,7 +30,7 @@ module.exports = function(passport){
 					//encrypt their password
 					const hashedpassword = hash(password)
 					//if all went well, create a new user 
-					const newUser = new User({username:username,password:hashedpassword,age:18,gender:"unknown"});
+					const newUser = new User({username:username,password:hashedpassword,age:age,gender:gender});
 					newUser.save(function(err){
 						if(err){
 							console.log("Error saving new user")
