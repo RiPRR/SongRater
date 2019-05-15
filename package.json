@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/RiPRR/SongRater#readme",
   "dependencies": {
+    "babel-helpers": "^6.24.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
