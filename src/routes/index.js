@@ -131,6 +131,49 @@ module.exports = function(passport){
 		res.redirect("/")
 	})
 
+	//route to retrieve all ratings for a certain song 
+	router.get("/ratingsApi/song/:Song",(req,res)=>{
+		let songTitle = req.params.Song
+		Rating.find({"song.title":songTitle},(err,results,count)=>{
+				res.send(results)
+		})
+
+	})
+
+	//Route to retrieve ratings for a particular user
+	router.get("/ratingsApi/user/:User",(req,res)=>{
+		let targetUser = req.params.User
+		Rating.find({"user.username":targetUser},(err,results,count)=>{
+			res.send(results)
+		})
+
+	})	
+
+	//Route to retrieve ratings based on a particular total correlation score & song 
+	router.get("/ratingsApi/correlation/:Song/:Low/:High",(req,res)=>{
+		let lowBound = Number(req.params.Low)
+		let highBound = Number(req.params.High)
+		let songTitle = req.params.Song
+		Rating.find({"song.title":songTitle},(err,results,count)=>{
+			let sortedResponse = []
+			for(let i=0;i<results.length;i++){
+				let corrData = results[i]["correlation"]
+				if(corrData){
+					corrData = JSON.parse(corrData)
+					let total = Number(corrData["total"])
+					if (total>lowBound && total<highBound){
+						console.log(total)
+						sortedResponse.push(results[i])
+					}
+				}
+			}
+			res.send(sortedResponse)
+		})
+
+	})			
+
+
+
 	
 
 	return router
